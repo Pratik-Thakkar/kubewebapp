@@ -1,0 +1,13 @@
+{
+  "name": "kubewebapp",
+  "version": "1.0.0",
+  "description": "User data API using docker",
+  "main": "index.js",
+  "repository": "git@github.com:Pratik-Thakkar/kubewebapp.git",
+  "author": "Pratik Thakkar <thakkarpratik277@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "forever": "^4.0.3"
+  }
+}
