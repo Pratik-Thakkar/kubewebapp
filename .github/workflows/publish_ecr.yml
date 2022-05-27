@@ -50,7 +50,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: public.ecr.aws/i0j7o1s5/ptdev-webapp
+        ECR_REGISTRY: public.ecr.aws/i0j7o1s5
         IMAGE_TAG: latest
       run: |
         # Build a docker container and
