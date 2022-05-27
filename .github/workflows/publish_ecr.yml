@@ -21,7 +21,7 @@ on:
 
 env:
   AWS_REGION: us-east-1                       # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: 783032098226                # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: ptdev                # set this to your Amazon ECR repository name
 
 permissions:
   contents: read
@@ -50,7 +50,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: public.ecr.aws/i0j7o1s5/ptdev-webapp
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest
       run: |
         # Build a docker container and
