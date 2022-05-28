@@ -18,12 +18,20 @@ on:
   push:
     branches:
       - main
+      
+  #pull_request:
+    #branches: 
+    #  - main
+    #types: [closed]
+
+permissions:
+  contents: read
 
 env:
   AWS_REGION: us-east-1                                           # set this to your preferred AWS region, e.g. us-west-1
   ECR_REGISTRY: public.ecr.aws/i0j7o1s5                           # set this to your Amazon ECR registry
   ECR_REPOSITORY: ptdev-webapp                                    # set this to your Amazon ECR repository name
-  IMAGE_TAG: latest                                               # ser image tag
+  IMAGE_TAG: latest                                               # set image tag
 
 jobs:
   build:

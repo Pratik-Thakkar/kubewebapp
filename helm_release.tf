@@ -11,6 +11,7 @@ provider "helm" {
 }
 
 resource "helm_release" "webapp" {
+  depends_on = [module.webapp-dev-eks]  
   name        = "kubewebapp"
   chart       = "./webappchart"
   namespace   = "webapp"
