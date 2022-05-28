@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.1",
-    "forever": "^4.0.3"
+    "forever": "^4.0.3",
+    "mysql2": "^2.3.3"
   }
 }
