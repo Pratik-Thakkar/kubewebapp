@@ -5,7 +5,8 @@ WORKDIR /var/www/node/kubewebapp
 COPY ./ ./
 
 RUN npm install -g npm@8.11.0 && \
-    npm install -g yarn forever --force
+    npm install -g yarn forever --force && \
+    yarn install --production --force
 
 USER node
 
