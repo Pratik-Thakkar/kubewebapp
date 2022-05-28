@@ -31,7 +31,7 @@ env:
   AWS_REGION: us-east-1                                           # set this to your preferred AWS region, e.g. us-west-1
   ECR_REGISTRY: public.ecr.aws/i0j7o1s5                           # set this to your Amazon ECR registry
   ECR_REPOSITORY: ptdev-webapp                                    # set this to your Amazon ECR repository name
-  IMAGE_TAG: 1.0.2                                               # set image tag
+  IMAGE_TAG: 1.0.3                                               # set image tag
 
 jobs:
   build:
