@@ -28,10 +28,8 @@ async function main() {
       SELECT  u.userID, u.firstName, u.lastName
       FROM    data u`);
     
-      res.json({
-      'Hello': 'world',
-      'Members': users
-    });
+      res.append('Hello world!');
+      res.append(users);
   }
 }
 
