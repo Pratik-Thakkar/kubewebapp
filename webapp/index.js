@@ -13,21 +13,22 @@ async function main() {
   
   process.on('SIGINT', close);                                                        // Close the connection on ctrl+c.
   
-  app.use('/', (req, res, next) => {
-    res.json({hello: 'world'})
-    next();
-  })
 
-  app.get('/', (req, res) => {
+  app.use('/', (req, res, next) => {
     const sqlQuery = 'SELECT u.userID, u.firstName, u.lastName FROM data u';
 
     database.query(sqlQuery, (err, result) => {
       if (err) throw err;
     
       res.json({ 'users': result});
+      next();
     });
-    res.end();
   });
+
+  app.get('/', (req, res) => {
+    console.log({hello: 'world'})
+    res.end();
+  })
   
   app.listen(port);
   console.log(`Listening on port ${port}.`);
