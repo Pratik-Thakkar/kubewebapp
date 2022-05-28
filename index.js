@@ -1,11 +1,38 @@
 async function main() {
-    const express  = require('express');
-    const app      = express();
-    const port     = 3000;
+  const mysql    = require('mysql2/promise');
+  const express  = require('express');
+  const app      = express();
+  const port     = 3000;
+  
+  const database = await mysql.createConnection({
+    host     : process.env.DB_HOST,
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_DATABASE
+  });
+  
+  process.on('SIGINT', close);                                                        // Close the connection on ctrl+c.
+  
+  app.get('/', (req, res) => {
+    const sqlQuery = 'SELECT u.userID, u.firstName, u.lastName FROM data u';
+
+    database.query(sqlQuery, (err, result) => {
+      if (err) throw err;
     
-    app.get('/', (req, res) => res.json({hello: 'world from Pratik'}));
-    
-    await app.listen(port);
-    console.log(`Listening on port ${port}.`);
+      res.json({ 
+        'hello': 'world',
+        'users': result
+      });
+    });
+  });
+  
+  app.listen(port);
+  console.log(`Listening on port ${port}.`);
+  
+  async function close() {
+    await conn.end();
+    process.exit(0);
   }
-  main();
+}
+
+main();

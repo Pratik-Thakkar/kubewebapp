@@ -1,0 +1,40 @@
+# Default values for webappchart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: public.ecr.aws/i0j7o1s5/ptdev-webapp
+  pullPolicy: IfNotPresent
+  tag: latest                                                             # Overrides the image tag whose default is the chart appVersion.
+
+imagePullSecrets: []
+
+service:
+  type: NodePort
+  port: 80
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+mysql:
+  mysqlDatabase: webapp_db
+  mysqlUser: ptdev
+  existingSecret: kubewebapp-db-pass
+  initializationFiles:
+    1-create-table-users.sql: |-
+      CREATE TABLE data (
+        userID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        firstName VARCHAR(255),
+        lastName VARCHAR(255),
+        createdOn TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
+    2-add-dummy-users.sql: |-
+      INSERT INTO users (firstName, lastName) VALUES ('Ratan', 'Tata');
+      INSERT INTO users (firstName, lastName) VALUES ('Mukesh', 'Ambani');
+      INSERT INTO users (firstName, lastName) VALUES ('Gautam', 'Adani');
+      INSERT INTO users (firstName, lastName) VALUES ('Shiv', 'Nadar');  
