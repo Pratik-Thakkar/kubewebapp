@@ -88,13 +88,13 @@ jobs:
       run: terraform state list helm_release.webapp
 
     - name: Output debug
-      run:  echo "Chart - ${{ steps.verifyChart.outputs.value }}"
-      
+      run:  echo "Chart - ${{ steps.verifyChart.outputs }}"
+
       # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Replace
-      if: steps.verifyChart.outputs.value == 'helm_release.webapp'
+      if: steps.verifyChart.outputs == 'helm_release.webapp'
       run:  terraform apply -replace="helm_release.webapp" -auto-approve -input=false
 
     - name: Terraform Apply
-      if: "contains(steps.verifyChart.outputs.value, 'Unknown resource')"
+      if: "contains(steps.verifyChart.outputs, 'Unknown resource')"
       run: terraform apply -auto-approve -input=false
