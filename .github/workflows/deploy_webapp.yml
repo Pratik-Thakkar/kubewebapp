@@ -86,10 +86,6 @@ jobs:
     - name: Terraform List
       id: verifyChart
       run: terraform state list helm_release.webapp
-      register: find_output
-
-    - debug:
-      var: find_output
 
       # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Replace
