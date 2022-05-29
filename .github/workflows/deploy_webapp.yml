@@ -86,12 +86,5 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
       run: |
-        CHART=$(terraform state list helm_release.webapp)
-        echo "$CHART"
-
-        if [[ $CHART == "helm_release.webapp" ]]
-        then
-            terraform apply -replace="helm_release.webapp" -auto-approve -input=false
-        else
-            terraform apply -auto-approve -input=false
-        fi
+        chmod +x "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
+        "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
