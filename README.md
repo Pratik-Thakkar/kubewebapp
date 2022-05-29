@@ -1,13 +1,14 @@
 ## Web application DevOps pipeline using EKS and Github actions
 
-+ webapp folder - Express.js API application and dockerfile for generating an image. This image will be used in Helm Chart.  
-+ webappchart folder - Express.js API application with mysql database. The configurations are defined using Helm Chart.
-+ .github/workflows
-  +  publish_ecr.yml - Publish images to Amazon ECR public repository. This workflow will be triggered once the branch is merged into main branch.
-  +  deploy_webapp.yml - Deploy infrastructure using terraform. Deploy webapp helm chart once the infrastructure is available. This workflow will be triggerred on successful completion of publish_ecr workflow.
-+  main.tf - Infrastructure required for EKS cluster. Creation on VPC and configuring S3 remote backend
-+  webapp-dev-eks.tf - Deploy EKS cluster with one manager node
-+  helm_release.tf - Deploy webapp helm chart on EKS cluster
++ webapp folder - Express.js API application and dockerfile for generating an image. This image will be used in Helm Chart
++ webappchart folder - Helm chart for deploying Express.js API application with mysql database on existing EKS cluster
++ .github/workflows folder
+  +  publish_ecr.yml - Publish images to Amazon ECR public repository. This workflow will be triggered on a successful merge into main branch
+  +  deploy_webapp.yml - Deploy infrastructure using terraform. This workflow will be triggerred on successful completion of publish_ecr workflow
++  main.tf - Infrastructure required for EKS cluster. Creation of VPC and configuring S3 remote backend
++  output.tf - Terraform output providing EKS cluster details and cluster endpoint
++  webapp-dev-eks.tf - Deploy EKS cluster with one AWS managed worker node
++  helm_release.tf - Deploy application helm chart from webappchart folder on existing EKS cluster
 +  tf_apply.sh - Bash script to guide terraform apply command
 
 ------
