@@ -86,5 +86,7 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
       run: |
+        echo ${GITHUB_WORKSPACE}
+        pwd
         chmod +x "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
         "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
