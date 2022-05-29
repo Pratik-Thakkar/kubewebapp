@@ -82,16 +82,8 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
 
-    # Verify in the resource exists
-    - name: Terraform List
-      id: verifyChart
-      run: terraform state list helm_release.webapp
-
       # On push to main, build or change infrastructure according to Terraform configuration files
-    - name: Terraform Replace
-      if: "contains(steps.verifyChart.outputs, 'helm_release.webapp')"
-      run:  terraform apply -replace="helm_release.webapp" -auto-approve -input=false
-
     - name: Terraform Apply
-      if: "contains(steps.verifyChart.outputs, 'Unknown resource')"
-      run: terraform apply -auto-approve -input=false
+      run: |
+        chmod +x "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
+        "${GITHUB_WORKSPACE}/.github/workflows/tf_apply.sh"
