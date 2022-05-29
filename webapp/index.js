@@ -30,7 +30,7 @@ async function main() {
       SELECT  u.userID, u.firstName, u.lastName
       FROM    data u`);
     
-      res.json(JSON.parse(users));
+      res.json(users);
   }
 }
 
