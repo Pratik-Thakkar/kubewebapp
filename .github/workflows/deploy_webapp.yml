@@ -87,6 +87,7 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         CHART=$(terraform state list helm_release.webapp)
+        echo "$CHART"
 
         if [[ $CHART == "helm_release.webapp" ]]
         then
