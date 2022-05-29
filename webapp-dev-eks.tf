@@ -10,16 +10,16 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.webapp-dev-eks.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.webapp-dev-eks.certificate_authority.0.data)
   exec {
-      api_version = "client.authentication.k8s.io/v1alpha1"
-      args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.webapp-dev-eks.name]
-      command     = "aws"
-    }
+    api_version = "client.authentication.k8s.io/v1alpha1"
+    args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.webapp-dev-eks.name]
+    command     = "aws"
+  }
 }
 
 module "webapp-dev-eks" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "18.21.0"
-  cluster_name    = "${local.cluster_name}"
+  cluster_name    = local.cluster_name
   cluster_version = "1.21"
   subnet_ids      = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
@@ -40,7 +40,7 @@ module "webapp-dev-eks" {
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
-    disk_size      = 50
+    disk_size = 50
   }
 
   eks_managed_node_groups = {

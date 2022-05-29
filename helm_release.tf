@@ -11,11 +11,11 @@ provider "helm" {
 }
 
 resource "helm_release" "webapp" {
-  depends_on = [module.webapp-dev-eks]  
-  name        = "kubewebapp"
-  chart       = "./webappchart"
-  namespace   = "webapp"
-  max_history = 3
+  depends_on       = [module.webapp-dev-eks]
+  name             = "kubewebapp"
+  chart            = "./webappchart"
+  namespace        = "webapp"
+  max_history      = 3
   create_namespace = true
   wait             = true
   reset_values     = true

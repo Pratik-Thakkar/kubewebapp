@@ -1,16 +1,16 @@
 terraform {
-  backend "s3" {                                                          # Built-in support for remote backends
-    bucket         = "kubewebapp-state"                                   # S3 bucket name to store the state file
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
-                                                                          # Implement locking mechanism using dynamoDB
-    dynamodb_table = "kubewebapp-locks"                                   # dynamoDB table name to acquire a lock
+  backend "s3" {                # Built-in support for remote backends
+    bucket = "kubewebapp-state" # S3 bucket name to store the state file
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+    # Implement locking mechanism using dynamoDB
+    dynamodb_table = "kubewebapp-locks" # dynamoDB table name to acquire a lock
     encrypt        = true
   }
 }
 
 provider "aws" {
-	region = "ap-south-1"
+  region = "ap-south-1"
 }
 
 data "aws_availability_zones" "available" {}
