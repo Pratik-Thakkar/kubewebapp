@@ -86,13 +86,14 @@ jobs:
     - name: Terraform List
       id: verifyChart
       run: terraform state list helm_release.webapp
+      register: find_output
 
-    - name: Output debug
-      run:  echo "Chart - ${{ steps.verifyChart.outputs }}"
+    - debug:
+      var: find_output
 
       # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Replace
-      if: steps.verifyChart.outputs == 'helm_release.webapp'
+      if: "contains(steps.verifyChart.outputs, 'helm_release.webapp')"
       run:  terraform apply -replace="helm_release.webapp" -auto-approve -input=false
 
     - name: Terraform Apply
