@@ -31,7 +31,7 @@ env:
   AWS_REGION: us-east-1                                           # set this to your preferred AWS region, e.g. us-west-1
   ECR_REGISTRY: public.ecr.aws/i0j7o1s5                           # set this to your Amazon ECR registry
   ECR_REPOSITORY: ptdev-webapp                                    # set this to your Amazon ECR repository name
-  IMAGE_TAG: 1.0.1                                               # set image tag
+  IMAGE_TAG: 1.0.0                                                # set image tag
 
 jobs:
   build:
@@ -40,9 +40,11 @@ jobs:
     environment: dev
 
     steps:
+    # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
 
+    # Configure AWS CLI to get access to state file
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -50,11 +52,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    # Authentication for ECR
     - name: Login to Amazon ECR
       id: login-ecr
       run: |
         aws ecr-public get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
 
+    # Build and Publish image
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       run: |

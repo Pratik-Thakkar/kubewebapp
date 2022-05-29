@@ -4,6 +4,7 @@ async function main() {
   const app      = express();
   const port     = 3000;
   
+  // Conntect to mysql database
   const database = await mysql.createConnection({
     host     : process.env.DB_HOST,
     user     : process.env.DB_USER,
@@ -11,10 +12,12 @@ async function main() {
     database : process.env.DB_DATABASE
   });
   
-  process.on('SIGINT', close);                                                        // Close the connection on ctrl+c.
+  // Close the connection on ctrl+c.
+  process.on('SIGINT', close);
 
   app.set('json spaces', 4)
   
+  // Get user route
   app.get('/', getData);
 
   app.listen(port);
@@ -25,6 +28,7 @@ async function main() {
     process.exit(0);
   }
 
+  // Fetch data from database
   async function getData(req, res) {
     const [users] = await database.query(`
       SELECT  u.userID, u.firstName, u.lastName

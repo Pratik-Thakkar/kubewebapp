@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: public.ecr.aws/i0j7o1s5/ptdev-webapp
   pullPolicy: IfNotPresent
-  tag: 1.0.1                                                             # Overrides the image tag whose default is the chart appVersion.
+  tag: 1.0.0                                                             # Overrides the image tag whose default is the chart appVersion.
 
 imagePullSecrets: []
 
