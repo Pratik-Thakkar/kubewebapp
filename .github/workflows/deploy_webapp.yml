@@ -86,6 +86,5 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
       run: |
-        ls -l
-        chmod +x /home/runner/work/kubewebapp/kubewebapp/tf_apply.sh
-        /home/runner/work/kubewebapp/kubewebapp/tf_apply.sh
+        chmod +x "${GITHUB_WORKSPACE}/tf_apply.sh"
+        "${GITHUB_WORKSPACE}/tf_apply.sh"

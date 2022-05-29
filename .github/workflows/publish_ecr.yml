@@ -15,14 +15,10 @@
 name: Publish image to ECR
 
 on:
-  push:
-    branches:
+  pull_request:
+    branches: 
       - main
-
-  #pull_request:
-    #branches: 
-    #  - main
-    #types: [closed]
+    types: [closed]
 
 permissions:
   contents: read
