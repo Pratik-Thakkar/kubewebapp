@@ -4,13 +4,13 @@ terraform {
     key            = "terraform.tfstate"
     region         = "us-east-1"
                                                                           # Implement locking mechanism using dynamoDB
-    dynamodb_table = "kubewebapp-locks"                                   # DynamoDB table name to acquire a lock
+    dynamodb_table = "kubewebapp-locks"                                   # dynamoDB table name to acquire a lock
     encrypt        = true
   }
 }
 
 provider "aws" {
-	region = "us-east-1"
+	region = "ap-south-1"
 }
 
 data "aws_availability_zones" "available" {}

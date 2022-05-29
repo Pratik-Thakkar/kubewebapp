@@ -13,6 +13,8 @@ async function main() {
   
   process.on('SIGINT', close);                                                        // Close the connection on ctrl+c.
 
+  app.set('json spaces', 4)
+  
   app.get('/', getData);
 
   app.listen(port);
@@ -28,7 +30,7 @@ async function main() {
       SELECT  u.userID, u.firstName, u.lastName
       FROM    data u`);
     
-      res.json(users);
+      res.json(JSON.parse(users));
   }
 }
 
