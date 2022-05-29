@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHART=$(terraform state list helm_release.webapp)
+CHART="terraform state list helm_release.webapp"
 
 if [[ $CHART == 'helm_release.webapp' ]]
 then
