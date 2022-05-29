@@ -85,4 +85,12 @@ jobs:
     # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve -input=false
+      run: |
+        CHART=$(terraform state list helm_release.webapp)
+
+        if [[ $CHART == "helm_release.webapp" ]]
+        then
+            terraform apply -replace="helm_release.webapp" -auto-approve -input=false
+        else
+            terraform apply -auto-approve -input=false
+        fi
