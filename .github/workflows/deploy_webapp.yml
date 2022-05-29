@@ -87,5 +87,5 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         ls -l
-        chmod +x /home/runner/work/kubewebapp/kubewebapp/.github/workflows/tf_apply.sh
-        /home/runner/work/kubewebapp/kubewebapp/.github/workflows/tf_apply.sh
+        chmod +x /home/runner/work/kubewebapp/kubewebapp/tf_apply.sh
+        /home/runner/work/kubewebapp/kubewebapp/tf_apply.sh
